@@ -3,10 +3,10 @@ package com.apradanas.prismoji;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatAutoCompleteTextView;
 import android.text.SpannableStringBuilder;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
+import android.widget.AutoCompleteTextView;
 
 import com.apradanas.prismoji.emoji.Emoji;
 
@@ -14,7 +14,7 @@ import com.apradanas.prismoji.emoji.Emoji;
  * Created by apradanas.
  */
 
-public class PrismojiAutocompleteTextView extends AppCompatAutoCompleteTextView {
+public class PrismojiAutocompleteTextView extends AutoCompleteTextView {
     private int emojiSize;
 
     public PrismojiAutocompleteTextView(Context context) {
