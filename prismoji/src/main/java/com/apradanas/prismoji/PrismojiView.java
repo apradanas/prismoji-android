@@ -54,9 +54,7 @@ final class PrismojiView extends LinearLayout implements ViewPager.OnPageChangeL
         setOrientation(VERTICAL);
 
         themeIconColor = ContextCompat.getColor(context, R.color.emoji_icons);
-        final TypedValue value = new TypedValue();
-        context.getTheme().resolveAttribute(R.attr.colorAccent, value, true);
-        themeAccentColor = value.data;
+        themeAccentColor = ContextCompat.getColor(context, R.color.emoji_icons_accent);
 
         final ViewPager emojisPager = (ViewPager) findViewById(R.id.emojis_pager);
         final LinearLayout emojisTab = (LinearLayout) findViewById(R.id.emojis_tab);
