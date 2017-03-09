@@ -14,8 +14,9 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.apradanas.prismoji.emoji.EmojiCategory;
 import com.apradanas.prismoji.listeners.OnEmojiBackspaceClickListener;
@@ -34,7 +35,7 @@ final class PrismojiView extends LinearLayout implements ViewPager.OnPageChangeL
     @ColorInt
     private final int themeIconColor;
 
-    private final ImageButton[] emojiTabs;
+    private final View[] emojiTabs;
     private final PrismojiPagerAdapter prismojiPagerAdapter;
 
     @Nullable
@@ -51,7 +52,6 @@ final class PrismojiView extends LinearLayout implements ViewPager.OnPageChangeL
         View.inflate(context, R.layout.emoji_view, this);
 
         setOrientation(VERTICAL);
-        setBackgroundColor(ContextCompat.getColor(context, R.color.emoji_background));
 
         themeIconColor = ContextCompat.getColor(context, R.color.emoji_icons);
         final TypedValue value = new TypedValue();
@@ -64,7 +64,7 @@ final class PrismojiView extends LinearLayout implements ViewPager.OnPageChangeL
 
         final EmojiCategory[] categories = PrismojiManager.getInstance().getCategories();
 
-        emojiTabs = new ImageButton[categories.length + 2];
+        emojiTabs = new View[categories.length + 2];
         emojiTabs[0] = inflateButton(context, R.drawable.emoji_recent, emojisTab);
         for (int i = 0; i < categories.length; i++) {
             emojiTabs[i + 1] = inflateButton(context, categories[i].getIcon(), emojisTab);
@@ -83,10 +83,12 @@ final class PrismojiView extends LinearLayout implements ViewPager.OnPageChangeL
 
     private void handleOnClicks(final ViewPager emojisPager) {
         for (int i = 0; i < emojiTabs.length - 1; i++) {
-            emojiTabs[i].setOnClickListener(new EmojiTabsClickListener(emojisPager, i));
+            final RelativeLayout categoryLayout = (RelativeLayout) emojiTabs[i].findViewById(R.id.category_layout);
+            categoryLayout.setOnClickListener(new EmojiTabsClickListener(emojisPager, i));
         }
 
-        emojiTabs[emojiTabs.length - 1].setOnTouchListener(
+        final RelativeLayout backspaceLayout = (RelativeLayout) emojiTabs[emojiTabs.length - 1].findViewById(R.id.category_layout);
+        backspaceLayout.setOnTouchListener(
                 new RepeatListener(INITIAL_INTERVAL, NORMAL_INTERVAL, new OnClickListener() {
                     @Override
                     public void onClick(final View view) {
@@ -101,15 +103,21 @@ final class PrismojiView extends LinearLayout implements ViewPager.OnPageChangeL
         this.onEmojiBackspaceClickListener = onEmojiBackspaceClickListener;
     }
 
-    private ImageButton inflateButton(final Context context, @DrawableRes final int icon, final ViewGroup parent) {
-        final ImageButton button = (ImageButton) LayoutInflater.from(context).inflate(R.layout.emoji_category, parent, false);
+    private View inflateButton(final Context context, @DrawableRes final int icon, final ViewGroup parent) {
+        final View categoryView = LayoutInflater.from(context).inflate(R.layout.emoji_category, parent, false);
+        final RelativeLayout categoryLayout = (RelativeLayout) categoryView.findViewById(R.id.category_layout);
+        final ImageView categoryIcon = (ImageView) categoryView.findViewById(R.id.category_button);
 
-        button.setImageDrawable(AppCompatResources.getDrawable(context, icon));
-        button.setColorFilter(themeIconColor, PorterDuff.Mode.SRC_IN);
+        categoryIcon.setImageDrawable(AppCompatResources.getDrawable(context, icon));
+        categoryIcon.setColorFilter(themeIconColor, PorterDuff.Mode.SRC_IN);
 
-        parent.addView(button);
+        if (icon == R.drawable.emoji_backspace) {
+            categoryLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.emoji_backspace_background));
+        }
 
-        return button;
+        parent.addView(categoryView);
+
+        return categoryView;
     }
 
     @Override
@@ -120,12 +128,20 @@ final class PrismojiView extends LinearLayout implements ViewPager.OnPageChangeL
             }
 
             if (emojiTabLastSelectedIndex >= 0 && emojiTabLastSelectedIndex < emojiTabs.length) {
-                emojiTabs[emojiTabLastSelectedIndex].setSelected(false);
-                emojiTabs[emojiTabLastSelectedIndex].setColorFilter(themeIconColor, PorterDuff.Mode.SRC_IN);
+                final ImageView categoryIcon = (ImageView) emojiTabs[emojiTabLastSelectedIndex].findViewById(R.id.category_button);
+                final View indicator = emojiTabs[emojiTabLastSelectedIndex].findViewById(R.id.category_indicator);
+
+                categoryIcon.setSelected(false);
+                categoryIcon.setColorFilter(themeIconColor, PorterDuff.Mode.SRC_IN);
+                indicator.setVisibility(INVISIBLE);
             }
 
-            emojiTabs[i].setSelected(true);
-            emojiTabs[i].setColorFilter(themeAccentColor, PorterDuff.Mode.SRC_IN);
+            final ImageView categoryIcon = (ImageView) emojiTabs[i].findViewById(R.id.category_button);
+            final View indicator = emojiTabs[i].findViewById(R.id.category_indicator);
+
+            categoryIcon.setSelected(true);
+            categoryIcon.setColorFilter(themeAccentColor, PorterDuff.Mode.SRC_IN);
+            indicator.setVisibility(VISIBLE);
 
             emojiTabLastSelectedIndex = i;
         }

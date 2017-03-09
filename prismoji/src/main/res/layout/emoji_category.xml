@@ -1,10 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/category_layout"
     android:layout_width="0dp"
     android:layout_height="match_parent"
     android:layout_weight="1"
-    android:background="?attr/selectableItemBackgroundBorderless"
-    android:padding="8dp"
-    android:scaleType="fitCenter"
-    tools:ignore="ContentDescription,Overdraw" />
+    android:orientation="vertical"
+    android:clickable="true"
+    android:background="@android:color/transparent"
+    android:foreground="?attr/selectableItemBackgroundBorderless">
+
+    <ImageView
+        android:id="@+id/category_button"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        android:scaleType="fitCenter"
+        android:layout_centerInParent="true"
+        android:background="@android:color/transparent"
+        tools:ignore="ContentDescription,Overdraw" />
+
+    <View
+        android:id="@+id/category_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginBottom="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/emoji_tab_indicator_background"
+        android:visibility="invisible"/>
+
+</RelativeLayout>

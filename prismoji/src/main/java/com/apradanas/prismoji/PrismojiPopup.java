@@ -40,6 +40,7 @@ public final class PrismojiPopup {
 
     final PopupWindow popupWindow;
     private final PrismojiEditText prismojiEditText;
+    private final PrismojiAutocompleteTextView prismojiAutocompleteTextView;
 
     int keyBoardHeight;
     boolean isPendingOpen;
@@ -101,10 +102,14 @@ public final class PrismojiPopup {
     @Nullable
     OnEmojiPopupDismissListener onEmojiPopupDismissListener;
 
-    PrismojiPopup(@NonNull final View rootView, @NonNull final PrismojiEditText prismojiEditText, @Nullable final RecentEmoji recent) {
+    PrismojiPopup(@NonNull final View rootView,
+                  @Nullable final PrismojiEditText prismojiEditText,
+                  @Nullable final PrismojiAutocompleteTextView prismojiAutocompleteTextView,
+                  @Nullable final RecentEmoji recent) {
         this.context = rootView.getContext();
         this.rootView = rootView;
         this.prismojiEditText = prismojiEditText;
+        this.prismojiAutocompleteTextView = prismojiAutocompleteTextView;
         this.recentEmoji = recent != null ? recent : new RecentEmojiManager(context);
 
         popupWindow = new PopupWindow(context);
@@ -120,7 +125,11 @@ public final class PrismojiPopup {
         final OnEmojiClickedListener clickListener = new OnEmojiClickedListener() {
             @Override
             public void onEmojiClicked(final Emoji emoji) {
-                prismojiEditText.input(emoji);
+                if (prismojiEditText != null) {
+                    prismojiEditText.input(emoji);
+                } else if (prismojiAutocompleteTextView != null) {
+                    prismojiAutocompleteTextView.input(emoji);
+                }
                 recentEmoji.addEmoji(emoji);
 
                 if (onEmojiClickedListener != null) {
@@ -138,7 +147,11 @@ public final class PrismojiPopup {
         prismojiView.setOnEmojiBackspaceClickListener(new OnEmojiBackspaceClickListener() {
             @Override
             public void onEmojiBackspaceClicked(final View v) {
-                prismojiEditText.backspace();
+                if (prismojiEditText != null) {
+                    prismojiEditText.backspace();
+                } else if (prismojiAutocompleteTextView != null) {
+                    prismojiAutocompleteTextView.backspace();
+                }
 
                 if (onEmojiBackspaceClickListener != null) {
                     onEmojiBackspaceClickListener.onEmojiBackspaceClicked(v);
@@ -181,13 +194,22 @@ public final class PrismojiPopup {
                 showAtBottom();
             } else {
                 // Open the text keyboard first and immediately after that show the emoji popup
-                prismojiEditText.setFocusableInTouchMode(true);
-                prismojiEditText.requestFocus();
+                if (prismojiEditText != null) {
+                    prismojiEditText.setFocusableInTouchMode(true);
+                    prismojiEditText.requestFocus();
+                } else if (prismojiAutocompleteTextView != null) {
+                    prismojiAutocompleteTextView.setFocusableInTouchMode(true);
+                    prismojiAutocompleteTextView.requestFocus();
+                }
 
                 showAtBottomPending();
 
                 final InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputMethodManager.showSoftInput(prismojiEditText, InputMethodManager.SHOW_IMPLICIT);
+                if (prismojiEditText != null) {
+                    inputMethodManager.showSoftInput(prismojiEditText, InputMethodManager.SHOW_IMPLICIT);
+                } else if (prismojiAutocompleteTextView != null) {
+                    inputMethodManager.showSoftInput(prismojiAutocompleteTextView, InputMethodManager.SHOW_IMPLICIT);
+                }
             }
 
             if (onEmojiPopupShownListener != null) {
@@ -242,6 +264,10 @@ public final class PrismojiPopup {
         private OnEmojiPopupDismissListener onEmojiPopupDismissListener;
         @Nullable
         private RecentEmoji recentEmoji;
+        @Nullable
+        private PrismojiEditText prismojiEditText;
+        @Nullable
+        private PrismojiAutocompleteTextView prismojiAutocompleteTextView;
 
         private Builder(final View rootView) {
             this.rootView = checkNotNull(rootView, "The rootView can't be null");
@@ -293,6 +319,18 @@ public final class PrismojiPopup {
             return this;
         }
 
+        @CheckResult
+        public Builder into(@NonNull final PrismojiEditText editText) {
+            prismojiEditText = editText;
+            return this;
+        }
+
+        @CheckResult
+        public Builder into(@NonNull final PrismojiAutocompleteTextView editText) {
+            prismojiAutocompleteTextView = editText;
+            return this;
+        }
+
         /**
          * allows you to pass your own implementation of recent emojis. If not provided the default
          * one {@link RecentEmojiManager} will be used
@@ -306,11 +344,15 @@ public final class PrismojiPopup {
         }
 
         @CheckResult
-        public PrismojiPopup build(@NonNull final PrismojiEditText prismojiEditText) {
+        public PrismojiPopup build() {
             PrismojiManager.getInstance().verifyInstalled();
-            checkNotNull(prismojiEditText, "EmojiEditText can't be null");
 
-            final PrismojiPopup emojiPopup = new PrismojiPopup(rootView, prismojiEditText, recentEmoji);
+            final PrismojiPopup emojiPopup = new PrismojiPopup(
+                    rootView,
+                    prismojiEditText,
+                    prismojiAutocompleteTextView,
+                    recentEmoji
+            );
             emojiPopup.onSoftKeyboardCloseListener = onSoftKeyboardCloseListener;
             emojiPopup.onEmojiClickedListener = onEmojiClickedListener;
             emojiPopup.onSoftKeyboardOpenListener = onSoftKeyboardOpenListener;

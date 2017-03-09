@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.apradanas.prismoji.PrismojiAutocompleteTextView;
 import com.apradanas.prismoji.PrismojiEditText;
 import com.apradanas.prismoji.PrismojiPopup;
 import com.apradanas.prismoji.listeners.OnSoftKeyboardCloseListener;
@@ -14,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     private PrismojiPopup prismojiPopup;
 
-    private PrismojiEditText editText;
+    private PrismojiAutocompleteTextView editText;
     private ViewGroup rootView;
     private ImageView emojiButton;
 
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        editText = (PrismojiEditText) findViewById(R.id.main_activity_edit_text);
+        editText = (PrismojiAutocompleteTextView) findViewById(R.id.main_activity_edit_text);
         rootView = (ViewGroup) findViewById(R.id.main_activity_root_view);
         emojiButton = (ImageView) findViewById(R.id.main_activity_emoji);
 
@@ -40,11 +41,13 @@ public class MainActivity extends AppCompatActivity {
     private void setUpPrismojiPopup() {
         prismojiPopup = PrismojiPopup.Builder.fromRootView(rootView)
                 .setOnSoftKeyboardCloseListener(new OnSoftKeyboardCloseListener() {
-                    @Override public void onKeyboardClose() {
+                    @Override
+                    public void onKeyboardClose() {
                         prismojiPopup.dismiss();
                     }
                 })
-                .build(editText);
+                .into(editText)
+                .build();
     }
 
     @Override

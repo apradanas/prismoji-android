@@ -4,8 +4,9 @@
     <LinearLayout
         android:id="@+id/emojis_tab"
         android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:orientation="horizontal" />
+        android:layout_height="46dp"
+        android:orientation="horizontal"
+        android:background="@color/emoji_tab_background"/>
 
     <View
         android:layout_width="match_parent"
@@ -15,6 +16,7 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/emojis_pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="@color/emoji_content_background"/>
 
 </merge>

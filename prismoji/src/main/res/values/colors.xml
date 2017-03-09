@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="emoji_background">#ECEFF1</color>
-    <color name="emoji_icons">#614a4a4a</color>
-    <color name="emoji_divider">#1F000000</color>
+    <color name="emoji_icons">#994a4a4a</color>
+    <color name="emoji_tab_background">#e9eff4</color>
+    <color name="emoji_tab_indicator_background">#d3385d</color>
+    <color name="emoji_backspace_background">#f7fafc</color>
+    <color name="emoji_divider">#979797</color>
+    <color name="emoji_content_background">#eff3f7</color>
 </resources>
