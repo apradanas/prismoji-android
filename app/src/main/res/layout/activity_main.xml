@@ -12,8 +12,10 @@
 
         <com.apradanas.prismoji.PrismojiTextView
             android:id="@+id/main_activity_text_view"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_centerInParent="true"
             android:text="Hello World!"
             app:emojiSize="26sp" />
 
@@ -29,17 +31,28 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:padding="12dp"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/ic_launcher"
+                android:src="@drawable/ic_tag_faces_black_48dp"
                 tools:ignore="ContentDescription" />
 
             <com.apradanas.prismoji.PrismojiAutocompleteTextView
                 android:id="@+id/main_activity_edit_text"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:imeOptions="actionSend"
                 android:inputType="textCapSentences|textMultiLine"
                 android:maxLines="3"
                 app:emojiSize="26sp" />
+
+            <ImageButton
+                android:id="@+id/main_activity_send"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="12dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_send_black_48dp"
+                tools:ignore="ContentDescription" />
 
         </LinearLayout>
 
