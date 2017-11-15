@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.apradanas.prismoji.listeners.OnEmojiClickedListener;
+import com.apradanas.prismoji.listeners.OnEmojiLongClickedListener;
 
 final class PrismojiPagerAdapter extends PagerAdapter {
     private final OnEmojiClickedListener listener;

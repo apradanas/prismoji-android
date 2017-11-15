@@ -20,6 +20,7 @@ import android.widget.PopupWindow;
 import com.apradanas.prismoji.emoji.Emoji;
 import com.apradanas.prismoji.listeners.OnEmojiBackspaceClickListener;
 import com.apradanas.prismoji.listeners.OnEmojiClickedListener;
+import com.apradanas.prismoji.listeners.OnEmojiLongClickedListener;
 import com.apradanas.prismoji.listeners.OnEmojiPopupDismissListener;
 import com.apradanas.prismoji.listeners.OnEmojiPopupShownListener;
 import com.apradanas.prismoji.listeners.OnSoftKeyboardCloseListener;

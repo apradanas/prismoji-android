@@ -1,9 +1,9 @@
-package com.apradanas.prismoji;
+package com.apradanas.prismoji.listeners;
 
 import android.view.View;
 
 import com.apradanas.prismoji.emoji.Emoji;
 
-interface OnEmojiLongClickedListener {
+public interface OnEmojiLongClickedListener {
     void onEmojiLongClicked(final View view, final Emoji emoji);
 }

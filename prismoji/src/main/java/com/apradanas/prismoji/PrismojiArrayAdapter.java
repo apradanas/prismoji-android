@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 
 import com.apradanas.prismoji.emoji.Emoji;
 import com.apradanas.prismoji.listeners.OnEmojiClickedListener;
+import com.apradanas.prismoji.listeners.OnEmojiLongClickedListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;

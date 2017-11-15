@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 
 import com.apradanas.prismoji.emoji.Emoji;
 import com.apradanas.prismoji.listeners.OnEmojiClickedListener;
+import com.apradanas.prismoji.listeners.OnEmojiLongClickedListener;
 
 import java.util.Collection;
 

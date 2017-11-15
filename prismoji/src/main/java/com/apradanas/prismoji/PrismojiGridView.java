@@ -7,6 +7,7 @@ import android.widget.GridView;
 
 import com.apradanas.prismoji.emoji.EmojiCategory;
 import com.apradanas.prismoji.listeners.OnEmojiClickedListener;
+import com.apradanas.prismoji.listeners.OnEmojiLongClickedListener;
 
 class PrismojiGridView extends GridView {
     protected PrismojiArrayAdapter prismojiArrayAdapter;

@@ -10,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.content.res.AppCompatResources;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +20,7 @@ import android.widget.RelativeLayout;
 import com.apradanas.prismoji.emoji.EmojiCategory;
 import com.apradanas.prismoji.listeners.OnEmojiBackspaceClickListener;
 import com.apradanas.prismoji.listeners.OnEmojiClickedListener;
+import com.apradanas.prismoji.listeners.OnEmojiLongClickedListener;
 import com.apradanas.prismoji.listeners.RepeatListener;
 
 import java.util.concurrent.TimeUnit;

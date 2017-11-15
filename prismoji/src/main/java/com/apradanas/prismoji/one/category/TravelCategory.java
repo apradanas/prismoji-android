@@ -8,7 +8,7 @@ import com.apradanas.prismoji.emoji.Emoji;
 import com.apradanas.prismoji.emoji.EmojiCategory;
 
 @SuppressWarnings("PMD.MethodReturnsInternalArray")
-public final class PlacesCategory implements EmojiCategory {
+public final class TravelCategory implements EmojiCategory {
     private static final Emoji[] DATA = new Emoji[]{
             new Emoji(0x1f697, R.drawable.emoji_one_1f697),
             new Emoji(0x1f695, R.drawable.emoji_one_1f695),
@@ -93,9 +93,9 @@ public final class PlacesCategory implements EmojiCategory {
             new Emoji(0x1f6e3, R.drawable.emoji_one_1f6e3),
             new Emoji(0x1f3d7, R.drawable.emoji_one_1f3d7),
             new Emoji(0x1f3ed, R.drawable.emoji_one_1f3ed),
-            new Emoji(0x1f3d8, R.drawable.emoji_one_1f3d8),
             new Emoji(0x1f3e0, R.drawable.emoji_one_1f3e0),
             new Emoji(0x1f3e1, R.drawable.emoji_one_1f3e1),
+            new Emoji(0x1f3d8, R.drawable.emoji_one_1f3d8),
             new Emoji(0x1f3da, R.drawable.emoji_one_1f3da),
             new Emoji(0x1f3e2, R.drawable.emoji_one_1f3e2),
             new Emoji(0x1f3ec, R.drawable.emoji_one_1f3ec),
@@ -140,6 +140,6 @@ public final class PlacesCategory implements EmojiCategory {
     @Override
     @DrawableRes
     public int getIcon() {
-        return R.drawable.emoji_one_category_places;
+        return R.drawable.emoji_one_category_travel;
     }
 }
