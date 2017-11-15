@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.apradanas.prismoji.PrismojiAutocompleteTextView;
-import com.apradanas.prismoji.PrismojiEditText;
 import com.apradanas.prismoji.PrismojiPopup;
 import com.apradanas.prismoji.listeners.OnSoftKeyboardCloseListener;
 
