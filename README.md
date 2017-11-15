@@ -47,10 +47,10 @@ Call `prismojiTextView.setText` with the String that contains Unicode encoded Em
 
 ```
 <com.apradanas.prismoji.PrismojiEditText
-                android:id="@+id/prismojiEditText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:emojiSize="26sp" />
+	android:id="@+id/prismojiEditText"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	app:emojiSize="26sp" />
 ```
 To open `PrismojiPopup`:
 
@@ -58,11 +58,11 @@ To open `PrismojiPopup`:
 PrismojiPopup prismojiPopup = PrismojiPopup.Builder
 	.fromRootView(rootView)
 	.setOnSoftKeyboardCloseListener(new OnSoftKeyboardCloseListener() {
-                    @Override
-                    public void onKeyboardClose() {
-                        prismojiPopup.dismiss();
-                    }
-                	})
+		@Override
+		public void onKeyboardClose() {
+			prismojiPopup.dismiss();
+		}
+	})
 	.into(prismojiEditText)
 	.build();
                 	
