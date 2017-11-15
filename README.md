@@ -1,6 +1,7 @@
 # prismoji-android
 #### A simple Android Emoji library based on Emoji One 
 
+[![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-prismoji--android-green.svg?style=flat )]( https://android-arsenal.com/details/1/6455 )
 [![GitHub release](https://img.shields.io/github/release/apradanas/prismoji-android.svg)]()
 [![](https://jitpack.io/v/apradanas/prismoji-android.svg)](https://jitpack.io/#apradanas/prismoji-android)
 
